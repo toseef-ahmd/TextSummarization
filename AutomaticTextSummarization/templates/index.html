@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Document Summarizer</title>
+    <!-- Include Bootstrap CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+</head>
+<body>
+    <div class="container">
+        <h1 class="mt-5">Document Summarizer</h1>
+        <form action="/summarize" method="post" enctype="multipart/form-data" class="mt-4">
+            <div class="form-group">
+                <label for="document">Upload a file or provide a link:</label>
+                <input type="file" name="file" class="form-control-file">
+            </div>
+            <div class="form-group">
+                <input type="text" name="link" placeholder="Or, enter a link" class="form-control">
+            </div>
+            <div class="form-group">
+                <label for="length">Summary Length (default is 3):</label>
+                <input type="number" name="length" value="3" class="form-control">
+            </div>
+            <button type="submit" class="btn btn-primary">Summarize</button>
+        </form>
+
+        <!-- Add a section to display the TextRank summary -->
+        {% if summary_textrank %}
+        <h2>Summary (TextRank Method)</h2>
+        {{ summary_textrank }}
+        {% endif %}
+        <!-- Add a section to display the Relevance summary -->
+        {% if summary_relevance %}
+        <h2>Summary (Relevance Method)</h2>
+       {{ summary_relevance }}
+        {% endif %}
+
+        <!-- Add a section to display the LSA summary -->
+        {% if summary_lsa %}
+        <h2>Summary (LSA Method)</h2>
+        {{ summary_lsa }}
+        {% endif %}
+
+        <!-- Add an error message section with Bootstrap alert classes -->
+        {% if error_message %}
+        <div class="alert alert-danger mt-3">
+            {{ error_message }}
+        </div>
+        {% endif %}
+    </div>
+
+    <!-- Include Bootstrap JS and jQuery -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>
